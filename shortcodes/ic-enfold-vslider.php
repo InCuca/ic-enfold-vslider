@@ -81,6 +81,13 @@ if ( !class_exists( 'ic_enfold_vslider' ) ) {
 								"type" 	=> "input"
 							),
 							array(
+                                "name" 	=> __("Slide Subtitle", 'avia_framework' ),
+                                "desc" 	=> __("Enter the slide subtitle here (Better keep it short)", 'avia_framework' ) ,
+                                "id" 	=> "subtitle",
+                                "std" 	=> "Slide Subtitle",
+								"type" 	=> "input"
+							),
+							array(
 								"name" 	=> 'Featured settings',
 								"desc" 	=> "Either use the image or video in featured space",
 								"id" 	=> "featured",
@@ -204,13 +211,36 @@ if ( !class_exists( 'ic_enfold_vslider' ) ) {
 			 * Creates $class, $custom_class, $custom_markup, $message
 			 */
 			extract($atts);
+			var_dump($atts);
 			$custom_class = $custom_class?" $custom_class":"";
 
 			ob_start();
 			?>
-			<div class="ic-enfold-vslider-container<?php echo $custom_class; ?>">
-				<?php echo $message; ?>
-			</div>
+			
+			<template class="ic-enfold-vslider-container<?php echo $custom_class; ?>">
+				 <ic-vslider>
+				 	<?php foreach ($content as $slide): extract ($slide['attr']); ?>
+					<ic-vslider-slide
+						title="<?php echo $title; ?>"
+						subtitle="<?php echo $subtitle; ?>"
+					>
+						<img
+						slot="featured"
+						src="https://placekitten.com/380/380"
+						alt="kitty"
+						>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+						Maecenas tempus, urna sodales condimentum eleifend,
+						metus dui suscipit diam, eget consequat augue libero vel
+						purus. In sed efficitur libero. Aenean scelerisque leo
+						sed dolor hendrerit, id gravida lorem mattis. Etiam
+						laoreet urna sit amet posuere ultricies. Cras hendrerit
+						vel velit at varius. Duis dictum tellus vel erat
+						pellentesque, vel commodo ipsum varius.
+					</ic-vslider-slide>
+					<?php endforeach; ?>
+				</ic-vslider>
+			</template>
 			<?php
 			$output = ob_get_contents();
 			ob_end_clean();
