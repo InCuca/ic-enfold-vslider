@@ -224,19 +224,50 @@ if ( !class_exists( 'ic_enfold_vslider' ) ) {
 						title="<?php echo $title; ?>"
 						subtitle="<?php echo $subtitle; ?>"
 					>
+						<?php
+						if( ! empty( $attachment ) )
+						{
+							/**
+							 * Allows e.g. WPML to reroute to translated image
+							 */
+							$posts = get_posts( array(
+								'include'			=> $attachment,
+								'post_status'		=> 'inherit',
+								'post_type'			=> 'attachment',
+								'post_mime_type'	=> 'image',
+								'order'				=> 'ASC',
+								'orderby'			=> 'post__in'
+							));
+
+							if( is_array( $posts ) && ! empty( $posts ) )
+							{
+								$attachment_entry = $posts[0];
+								
+								$alt = get_post_meta($attachment_entry->ID, '_wp_attachment_image_alt', true);
+								$alt = !empty($alt) ? esc_attr($alt) : '';
+								$title = trim($attachment_entry->post_title) ? esc_attr($attachment_entry->post_title) : "";
+								
+								if ($copyright !== "") {
+									$copyright_text = get_post_meta($attachment_entry->ID, '_avia_attachment_copyright', true );
+								}
+								if(!empty($attachment_size))
+								{
+									$image = wp_get_attachment_image_src($attachment_entry->ID, $attachment_size);
+									
+									$img_h= !empty($image[2]) ? $image[2] : "";
+									$img_w= !empty($image[1]) ? $image[1] : "";
+									$image  = !empty($image[0]) ? $image[0] : "";
+								}
+							}
+						}
+						?>
 						<img
-						slot="featured"
-						src="https://placekitten.com/380/380"
-						alt="kitty"
+							slot="featured"
+							src="<?php echo $image; ?>"
+							alt="<?php echo $alt; ?>"
+							title="<?php echo $title; ?>"
 						>
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-						Maecenas tempus, urna sodales condimentum eleifend,
-						metus dui suscipit diam, eget consequat augue libero vel
-						purus. In sed efficitur libero. Aenean scelerisque leo
-						sed dolor hendrerit, id gravida lorem mattis. Etiam
-						laoreet urna sit amet posuere ultricies. Cras hendrerit
-						vel velit at varius. Duis dictum tellus vel erat
-						pellentesque, vel commodo ipsum varius.
+						<?php echo ShortcodeHelper::avia_apply_autop(ShortcodeHelper::avia_remove_autop($slide["content"])); ?>
 					</ic-vslider-slide>
 					<?php endforeach; ?>
 				</ic-vslider>
