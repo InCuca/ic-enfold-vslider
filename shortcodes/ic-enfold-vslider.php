@@ -261,12 +261,17 @@ if ( !class_exists( 'ic_enfold_vslider' ) ) {
 							}
 						}
 						?>
+						<?php if(!empty($image)): ?>
 						<img
 							slot="featured"
 							src="<?php echo $image; ?>"
 							alt="<?php echo $alt; ?>"
 							title="<?php echo $title; ?>"
 						>
+						<?php endif; ?>
+						<?php if(!empty($video)): ?>
+						<?php echo do_shortcode("[av_video src='{$video}' format='16-9' width='16' height='9']"); ?>
+						<?php endif; ?>
 						<?php echo ShortcodeHelper::avia_apply_autop(ShortcodeHelper::avia_remove_autop($slide["content"])); ?>
 					</ic-vslider-slide>
 					<?php endforeach; ?>
