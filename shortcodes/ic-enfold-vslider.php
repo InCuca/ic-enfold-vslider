@@ -212,11 +212,12 @@ if ( !class_exists( 'ic_enfold_vslider' ) ) {
 			 */
 			extract($atts);
 			$custom_class = $custom_class?" $custom_class":"";
-
+			$p_uid = array_reduce($content, function($uid, $c) {
+				return $uid . $c['attr']['av_uid'];
+			});
 			ob_start();
 			?>
-			
-			<template id="<?php echo $av_uid; ?>" class="ic-enfold-vslider-container<?php echo $custom_class; ?>">
+			<template id="<?php echo $p_uid; ?>" class="ic-enfold-vslider-container<?php echo $custom_class; ?>">
 				 <ic-vslider>
 				 	<?php foreach ($content as $slide): extract ($slide['attr']); ?>
 					<ic-vslider-slide
@@ -277,7 +278,7 @@ if ( !class_exists( 'ic_enfold_vslider' ) ) {
 				</ic-vslider>
 			</template>
 			<script>
-				window.setupIcEnfoldVslider("<?php echo $av_uid; ?>");
+				window.setupIcEnfoldVslider("<?php echo $p_uid; ?>");
 			</script>
 			<?php
 			$output = ob_get_contents();
