@@ -211,7 +211,6 @@ if ( !class_exists( 'ic_enfold_vslider' ) ) {
 			 * Creates $class, $custom_class, $custom_markup, $message
 			 */
 			extract($atts);
-			var_dump($atts);
 			$custom_class = $custom_class?" $custom_class":"";
 
 			ob_start();
