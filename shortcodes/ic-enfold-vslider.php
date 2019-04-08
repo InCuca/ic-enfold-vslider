@@ -309,7 +309,8 @@ if ( !class_exists( 'ic_enfold_vslider' ) ) {
 			$plugin_dir = plugin_dir_url(__FILE__);
 			wp_enqueue_style( 'ic-enfold-vslider' , $plugin_dir.'../css/ic-enfold-vslider.css' , array(), false );
 			wp_enqueue_script( 'vue' , $plugin_dir.'../js/vue.js' , array(), false);
-			wp_enqueue_script( 'ic-enfold-vslider' , $plugin_dir.'../js/ic-enfold-vslider.js' , array('vue'), false);
+			wp_enqueue_script( 'ic-vslider' , $plugin_dir.'../js/ic-vslider.umd.min.js' , array('vue'), false);
+			wp_enqueue_script( 'ic-enfold-vslider' , $plugin_dir.'../js/ic-enfold-vslider.js' , array('ic-vslider'), false);
 		}
 	}
 }
