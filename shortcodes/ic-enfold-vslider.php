@@ -18,6 +18,37 @@ if ( !class_exists( 'ic_enfold_vslider' ) ) {
 
 		function popup_elements()
 		{
+			if(avia_get_option('disable_mediaelement') == 'disable_mediaelement')
+			{
+				$videoText = __("Please link to an external video by URL",'avia_framework' )."<br/><br/>".
+						__("A list of all supported Video Services can be found on",'avia_framework' ).
+						" <a target='_blank' href='http://codex.wordpress.org/Embeds#Okay.2C_So_What_Sites_Can_I_Embed_From.3F'>WordPress.org</a><br/><br/>".
+						__("Working examples:",'avia_framework' ). "<br/>".
+						"<strong>https://vimeo.com/1084537</strong><br/>".
+						"<strong>https://www.youtube.com/watch?v=G0k3kHtyoqc</strong><br/><br/>"."<strong class='av-builder-note'>".									__("Using self hosted videos is currently disabled. You can enable it in Enfold &raquo; Performance",'avia_framework' )."</strong><br/>";
+
+			}
+			//if youtube/vimeo is disabled
+			else if(avia_get_option('disable_video') == 'disable_video')
+			{
+				$videoText = __("Either upload a new video or choose an existing video from your media library",'avia_framework' )."<br/><br/>".
+						__("Different Browsers support different file types (mp4, ogv, webm). If you embed an example.mp4 video the video player will automatically check if an example.ogv and example.webm video is available and display those versions in case its possible and necessary",'avia_framework' )."<br/><br/><strong class='av-builder-note'>".
+						__("Using external services like Youtube or Vimeo is currently disabled. You can enable it in Enfold &raquo; Performance",'avia_framework' )."</strong><br/>";
+						
+			}
+			//all video enabled
+			else
+			{
+				$videoText = __("Either upload a new video, choose an existing video from your media library or link to a video by URL",'avia_framework' )."<br/><br/>".
+									__("A list of all supported Video Services can be found on",'avia_framework' ).
+									" <a target='_blank' href='http://codex.wordpress.org/Embeds#Okay.2C_So_What_Sites_Can_I_Embed_From.3F'>WordPress.org</a><br/><br/>".
+									__("Working examples, in case you want to use an external service:",'avia_framework' ). "<br/>".
+									"<strong>https://vimeo.com/1084537</strong><br/>".
+									"<strong>https://www.youtube.com/watch?v=G0k3kHtyoqc</strong><br/><br/>".
+									"<strong>".__("Attention when using self hosted HTML 5 Videos",'avia_framework' ). ":</strong><br/>".
+									__("Different Browsers support different file types (mp4, ogv, webm). If you embed an example.mp4 video the video player will automatically check if an example.ogv and example.webm video is available and display those versions in case its possible and necessary",'avia_framework' )."<br/>";
+			}
+			
 			$this->elements = array(
 					
 				array(
@@ -48,6 +79,33 @@ if ( !class_exists( 'ic_enfold_vslider' ) ) {
                                 "id" 	=> "title",
                                 "std" 	=> "Slide Title",
 								"type" 	=> "input"
+							),
+							array(
+								"name" 	=> __("Choose Image",'avia_framework' ),
+								"desc" 	=> __("Either upload a new, or choose an existing image from your media library",'avia_framework' ),
+								"id" 	=> "image",
+								"type" 	=> "image",
+								"title" => __("Insert Image",'avia_framework' ),
+								"button" => __("Insert",'avia_framework' ),
+								"std" 	=> AviaBuilder::$path['imagesURL']."placeholder.jpg"
+							),
+							array(	
+								"name" 	=> __("Choose Video",'avia_framework' ),
+								"desc" 	=> $videoText,
+								"id" 	=> "video",
+								"type" 	=> "video",
+								"title" => __("Insert Video",'avia_framework' ),
+								"button" => __("Insert",'avia_framework' ),
+								"std" 	=> ""
+							),
+							array(
+								"name" 	=> __("Choose Image",'avia_framework' ),
+								"desc" 	=> __("Either upload a new, or choose an existing image from your media library",'avia_framework' ),
+								"id" 	=> "image",
+								"type" 	=> "image",
+								"title" => __("Insert Image",'avia_framework' ),
+								"button" => __("Insert",'avia_framework' ),
+								"std" 	=> AviaBuilder::$path['imagesURL']."placeholder.jpg"
 							),
                             array(
                                 "name" 	=> __("Slide Content", 'avia_framework' ),
@@ -132,7 +190,10 @@ if ( !class_exists( 'ic_enfold_vslider' ) ) {
                 'av-desktop-hide'=>'',
                 'av-medium-hide'=>'',
                 'av-small-hide'=>'',
-                'av-mini-hide'=>'',
+				'av-mini-hide'=>'',
+				'image' => '',
+				'video' => '',
+				'featured_type' => 'image',
 			), $atts, $this->config['shortcode']);
 
 			/*
