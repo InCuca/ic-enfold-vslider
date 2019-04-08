@@ -1,7 +1,4 @@
 
-function setupComponent(container) {
-    
+window.setupIcEnfoldVslider = function(av_uid) {
+    console.log(av_uid);
 }
-
-const targets = document.querySelectorAll('');
-Array.prototype.forEach.call(targets, setupComponent);

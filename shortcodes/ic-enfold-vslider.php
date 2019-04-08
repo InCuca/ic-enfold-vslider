@@ -216,7 +216,7 @@ if ( !class_exists( 'ic_enfold_vslider' ) ) {
 			ob_start();
 			?>
 			
-			<template class="ic-enfold-vslider-container<?php echo $custom_class; ?>">
+			<template id="<?php echo $av_uid; ?>" class="ic-enfold-vslider-container<?php echo $custom_class; ?>">
 				 <ic-vslider>
 				 	<?php foreach ($content as $slide): extract ($slide['attr']); ?>
 					<ic-vslider-slide
@@ -276,6 +276,9 @@ if ( !class_exists( 'ic_enfold_vslider' ) ) {
 					<?php endforeach; ?>
 				</ic-vslider>
 			</template>
+			<script>
+				window.setupIcEnfoldVslider("<?php echo $av_uid; ?>");
+			</script>
 			<?php
 			$output = ob_get_contents();
 			ob_end_clean();
@@ -304,7 +307,7 @@ if ( !class_exists( 'ic_enfold_vslider' ) ) {
 		{
 			$plugin_dir = plugin_dir_url(__FILE__);
 			wp_enqueue_style( 'ic-enfold-vslider' , $plugin_dir.'../css/ic-enfold-vslider.css' , array(), false );
-			wp_enqueue_script( 'ic-enfold-vslider' , $plugin_dir.'../js/ic-enfold-vslider.js' , array(), false, TRUE );
+			wp_enqueue_script( 'ic-enfold-vslider' , $plugin_dir.'../js/ic-enfold-vslider.js' , array(), false);
 		}
 	}
 }
