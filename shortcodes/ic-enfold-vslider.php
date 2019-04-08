@@ -81,22 +81,15 @@ if ( !class_exists( 'ic_enfold_vslider' ) ) {
 								"type" 	=> "input"
 							),
 							array(
-								"name" 	=> __("Choose Image",'avia_framework' ),
-								"desc" 	=> __("Either upload a new, or choose an existing image from your media library",'avia_framework' ),
-								"id" 	=> "image",
-								"type" 	=> "image",
-								"title" => __("Insert Image",'avia_framework' ),
-								"button" => __("Insert",'avia_framework' ),
-								"std" 	=> AviaBuilder::$path['imagesURL']."placeholder.jpg"
-							),
-							array(	
-								"name" 	=> __("Choose Video",'avia_framework' ),
-								"desc" 	=> $videoText,
-								"id" 	=> "video",
-								"type" 	=> "video",
-								"title" => __("Insert Video",'avia_framework' ),
-								"button" => __("Insert",'avia_framework' ),
-								"std" 	=> ""
+								"name" 	=> 'Featured settings',
+								"desc" 	=> "Either use the image or video in featured space",
+								"id" 	=> "featured",
+								"type" 	=> "select",
+								"std" 	=> "image",
+								"subtype" => array(
+									'Image'=>'image',
+									'Video' => 'video'
+								),
 							),
 							array(
 								"name" 	=> __("Choose Image",'avia_framework' ),
@@ -105,7 +98,18 @@ if ( !class_exists( 'ic_enfold_vslider' ) ) {
 								"type" 	=> "image",
 								"title" => __("Insert Image",'avia_framework' ),
 								"button" => __("Insert",'avia_framework' ),
-								"std" 	=> AviaBuilder::$path['imagesURL']."placeholder.jpg"
+								"std" 	=> AviaBuilder::$path['imagesURL']."placeholder.jpg",
+								"required" => array('featured','equals','image')
+							),
+							array(	
+								"name" 	=> __("Choose Video",'avia_framework' ),
+								"desc" 	=> $videoText,
+								"id" 	=> "video",
+								"type" 	=> "video",
+								"title" => __("Insert Video",'avia_framework' ),
+								"button" => __("Insert",'avia_framework' ),
+								"std" 	=> "",
+								"required" => array('featured','equals','video')
 							),
                             array(
                                 "name" 	=> __("Slide Content", 'avia_framework' ),
@@ -193,7 +197,7 @@ if ( !class_exists( 'ic_enfold_vslider' ) ) {
 				'av-mini-hide'=>'',
 				'image' => '',
 				'video' => '',
-				'featured_type' => 'image',
+				'featured' => 'image',
 			), $atts, $this->config['shortcode']);
 
 			/*
