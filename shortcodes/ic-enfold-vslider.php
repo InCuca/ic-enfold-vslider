@@ -146,7 +146,15 @@ if ( !class_exists( 'ic_enfold_vslider' ) ) {
 						"type" 	=> "tab",
 						"name"	=> __("Screen Options",'avia_framework' ),
 						'nodescription' => true
-					),			
+					),
+					
+					array(
+						"name" 	=> __("Height", 'avia_framework' ),
+						"desc" 	=> __("Enter slider height in px", 'avia_framework' ) ,
+						"id" 	=> "height",
+						"std" 	=> "400",
+						"type" 	=> "input"
+					),
 								
 					array(
 						"name" 	=> __("Element Visibility",'avia_framework' ),
@@ -207,6 +215,7 @@ if ( !class_exists( 'ic_enfold_vslider' ) ) {
 				'custom_markup' => $meta['custom_markup'],
 				'content'		=> ShortcodeHelper::shortcode2array($content, 1),
 				'legend' => '',
+				'height' => '400',
                 'av-desktop-hide'=>'',
                 'av-medium-hide'=>'',
                 'av-small-hide'=>'',
@@ -224,10 +233,13 @@ if ( !class_exists( 'ic_enfold_vslider' ) ) {
 			$p_uid = array_reduce($content, function($uid, $c) {
 				return $uid . $c['attr']['av_uid'];
 			});
+			$options = array(
+				'height' => $height,
+			);
 			ob_start();
 			?>
 			<template id="<?php echo $p_uid; ?>">
-				 <ic-vslider class="ic-enfold-vslider-container<?php echo $custom_class; ?>">
+				 <ic-vslider class="ic-enfold-vslider-container<?php echo $custom_class; ?>" :options='<?php echo json_encode($options); ?>'>
 					<?php if (!empty($legend)): ?>
 					 <template #legend-text><?php echo $legend; ?></template>
 					<?php endif; ?>
