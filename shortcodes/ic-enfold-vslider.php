@@ -229,6 +229,7 @@ if ( !class_exists( 'ic_enfold_vslider' ) ) {
 			 * Creates $class, $custom_class, $custom_markup, $message
 			 */
 			extract($atts);
+			extract(AviaHelper::av_mobile_sizes($atts)); //return $av_font_classes, $av_title_font_classes and $av_display_classes
 			$custom_class = $custom_class?" $custom_class":"";
 			$p_uid = array_reduce($content, function($uid, $c) {
 				return $uid . $c['attr']['av_uid'];
@@ -239,7 +240,7 @@ if ( !class_exists( 'ic_enfold_vslider' ) ) {
 			ob_start();
 			?>
 			<template id="<?php echo $p_uid; ?>">
-				 <ic-vslider class="ic-enfold-vslider-container<?php echo $custom_class; ?>" :options='<?php echo json_encode($options); ?>'>
+				 <ic-vslider class="ic-enfold-vslider-container<?php echo "$custom_class $av_display_classes"; ?>" :options='<?php echo json_encode($options); ?>'>
 					<?php if (!empty($legend)): ?>
 					 <template #legend-text><?php echo $legend; ?></template>
 					<?php endif; ?>
