@@ -223,20 +223,18 @@ if ( !class_exists( 'ic_enfold_vslider' ) ) {
 				'image' => '',
 				'video' => '',
 				'featured' => 'image',
+				'av_uid' => 'av-' . substr(uniqid(), 0, 8),
 			), $atts, $this->config['shortcode']);
-
 			/*
 			 * Creates $class, $custom_class, $custom_markup, $message
 			 */
 			extract($atts);
 			extract(AviaHelper::av_mobile_sizes($atts)); //return $av_font_classes, $av_title_font_classes and $av_display_classes
 			$custom_class = $custom_class?" $custom_class":"";
-			$p_uid = array_reduce($content, function($uid, $c) {
-				return $uid . $c['attr']['av_uid'];
-			});
 			$options = array(
 				'height' => $height,
 			);
+			$p_uid = $av_uid;
 			ob_start();
 			?>
 			<template id="<?php echo $p_uid; ?>">
