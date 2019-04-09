@@ -217,8 +217,8 @@ if ( !class_exists( 'ic_enfold_vslider' ) ) {
 			});
 			ob_start();
 			?>
-			<template id="<?php echo $p_uid; ?>" class="ic-enfold-vslider-container<?php echo $custom_class; ?>">
-				 <ic-vslider>
+			<template id="<?php echo $p_uid; ?>">
+				 <ic-vslider class="ic-enfold-vslider-container<?php echo $custom_class; ?>">
 				 	<?php foreach ($content as $slide): extract ($slide['attr']); ?>
 					<ic-vslider-slide
 						title="<?php echo $title; ?>"
@@ -261,6 +261,7 @@ if ( !class_exists( 'ic_enfold_vslider' ) ) {
 							}
 						}
 						?>
+						<template slot="featured">
 						<?php if(!empty($image)): ?>
 						<img
 							slot="featured"
@@ -272,6 +273,7 @@ if ( !class_exists( 'ic_enfold_vslider' ) ) {
 						<?php if(!empty($video)): ?>
 						<?php echo do_shortcode("[av_video src='{$video}' format='16-9' width='16' height='9']"); ?>
 						<?php endif; ?>
+						</template>
 						<?php echo ShortcodeHelper::avia_apply_autop(ShortcodeHelper::avia_remove_autop($slide["content"])); ?>
 					</ic-vslider-slide>
 					<?php endforeach; ?>
@@ -310,7 +312,7 @@ if ( !class_exists( 'ic_enfold_vslider' ) ) {
 			// FIXME: For some reason ic-vslider is not being bundle with swiper css
 			wp_enqueue_style( 'swiper' , $plugin_dir.'../css/swiper.min.css' , array(), false );
 			
-			wp_enqueue_style( 'ic-enfold-vslider' , $plugin_dir.'../css/ic-enfold-vslider.css' , array('swiper'), false );
+			wp_enqueue_style( 'ic-enfold-vslider' , $plugin_dir.'../css/ic-enfold-vslider.css' , array(), false );
 			wp_enqueue_script( 'vue' , $plugin_dir.'../js/vue.js' , array(), false);
 			wp_enqueue_script( 'ic-vslider' , $plugin_dir.'../js/ic-vslider.umd.min.js' , array('vue'), false);
 			wp_enqueue_script( 'ic-enfold-vslider' , $plugin_dir.'../js/ic-enfold-vslider.js' , array('ic-vslider'), false);
