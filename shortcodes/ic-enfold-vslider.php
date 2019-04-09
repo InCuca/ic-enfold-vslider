@@ -126,7 +126,15 @@ if ( !class_exists( 'ic_enfold_vslider' ) ) {
                                 "std" 	=> __("Slide Content goes here", 'avia_framework' ) ,
                             ),
                         )
-                    ),
+					),
+					
+					array(
+						"name" 	=> __("Legend", 'avia_framework' ),
+						"desc" 	=> __("Enter the number legend", 'avia_framework' ) ,
+						"id" 	=> "legend",
+						"std" 	=> "",
+						"type" 	=> "input"
+					),
 											
 					array(
 						"type" 	=> "close_div",
@@ -198,6 +206,7 @@ if ( !class_exists( 'ic_enfold_vslider' ) ) {
 				'custom_class' => '',
 				'custom_markup' => $meta['custom_markup'],
 				'content'		=> ShortcodeHelper::shortcode2array($content, 1),
+				'legend' => '',
                 'av-desktop-hide'=>'',
                 'av-medium-hide'=>'',
                 'av-small-hide'=>'',
@@ -219,6 +228,10 @@ if ( !class_exists( 'ic_enfold_vslider' ) ) {
 			?>
 			<template id="<?php echo $p_uid; ?>">
 				 <ic-vslider class="ic-enfold-vslider-container<?php echo $custom_class; ?>">
+					<?php if (!empty($legend)): ?>
+					 <template #legend-text><?php echo $legend; ?></template>
+					<?php endif; ?>
+
 				 	<?php foreach ($content as $slide): extract ($slide['attr']); ?>
 					<ic-vslider-slide
 						title="<?php echo $title; ?>"
