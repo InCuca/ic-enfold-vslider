@@ -326,7 +326,7 @@ if ( !class_exists( 'ic_enfold_vslider' ) ) {
 			wp_enqueue_style( 'swiper' , $plugin_dir.'../css/swiper.min.css' , array(), false );
 			
 			wp_enqueue_style( 'ic-enfold-vslider' , $plugin_dir.'../css/ic-enfold-vslider.css' , array(), false );
-			wp_enqueue_script( 'vue' , $plugin_dir.'../js/vue.js' , array(), false);
+			wp_enqueue_script( 'vue' , $plugin_dir.'../js/vue.min.js' , array(), false);
 			wp_enqueue_script( 'ic-vslider' , $plugin_dir.'../js/ic-vslider.umd.min.js' , array('vue'), false);
 			wp_enqueue_script( 'ic-enfold-vslider' , $plugin_dir.'../js/ic-enfold-vslider.js' , array('ic-vslider'), false);
 		}
