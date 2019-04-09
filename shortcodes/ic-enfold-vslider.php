@@ -287,12 +287,14 @@ if ( !class_exists( 'ic_enfold_vslider' ) ) {
 						?>
 						<template slot="featured">
 						<?php if(!empty($image)): ?>
-						<img
-							slot="featured"
-							src="<?php echo $image; ?>"
-							alt="<?php echo $alt; ?>"
-							title="<?php echo $title; ?>"
-						>
+						<div class="border-effect">
+							<img
+								slot="featured"
+								src="<?php echo $image; ?>"
+								alt="<?php echo $alt; ?>"
+								title="<?php echo $title; ?>"
+							>
+						</div>
 						<?php endif; ?>
 						<?php if(!empty($video)): ?>
 						<?php echo do_shortcode("[av_video src='{$video}' format='16-9' width='16' height='9']"); ?>

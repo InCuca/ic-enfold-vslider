@@ -6,7 +6,7 @@
  * Author:          INCUCA
  * Author URI:      https://incuca.net
  * Text Domain:     ic-enfold-vslider
- * Version:         0.2.3
+ * Version:         0.3.0
  *
  * @package         Ic_Enfold
  */
